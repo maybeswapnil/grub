@@ -28,7 +28,7 @@ func myBatchProcessor(job grub.Job) {
 
 func main() {
 	// Create a worker pool with custom job type
-	pool := grub.Newgrub(myBatchProcessor, 5, 10)
+	pool := grub.NewWorkerPool(myBatchProcessor, 5, 10)
 	start := time.Now()
 
 	printSystemInfo()
