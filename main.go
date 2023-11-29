@@ -5,7 +5,7 @@ import (
 	"log"
 	"runtime"
 	"time"
-	workerpool "grub/src"
+	grub "grub/src"
 )
 
 type MyJob struct {
