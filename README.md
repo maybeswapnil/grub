@@ -15,7 +15,7 @@ package main
 import (
 	"log"
 	"time"
-	workerpool "workergroup/src"
+	workerpool "github.com/maybeswapnil/grub"
 )
 
 type MyJob struct {
