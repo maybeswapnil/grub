@@ -5,7 +5,7 @@ A simple worker pool implementation in Go that allows concurrent processing of j
 ## Installation
 
 bash
-go get -u github.com/yourusername/workerpool
+go get -u github.com/maybeswapnil/workerpool
 
 
 ## Usage
