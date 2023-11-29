@@ -4,12 +4,12 @@ A simple worker pool implementation in Go that allows concurrent processing of j
 
 ## Installation
 
-bash
+```bash
 go get -u github.com/maybeswapnil/grub
-
+```
 
 ## Usage
-go
+```go
 package main
 
 import (
@@ -47,7 +47,7 @@ func main() {
 	log.Printf("Package took %s", elapsed)
 	log.Println("All jobs completed.")
 }
-
+```
 
 ### API
 workerpool.Job Represents a unit of work. Users can define their own types that implement this interface.
