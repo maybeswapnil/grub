@@ -19,7 +19,7 @@ func printSystemInfo() {
 	fmt.Printf("Number of Goroutines: %d\n", numGoroutine)
 }
 
-func myBatchProcessor(job workerpool.Job) {
+func myBatchProcessor(job grub.Job) {
 	myJob := job.(MyJob)
 	log.Println("Processing job:", myJob.ID)
 	time.Sleep(time.Second)
@@ -28,7 +28,7 @@ func myBatchProcessor(job workerpool.Job) {
 
 func main() {
 	// Create a worker pool with custom job type
-	pool := workerpool.NewWorkerPool(myBatchProcessor, 5, 10)
+	pool := grub.Newgrub(myBatchProcessor, 5, 10)
 	start := time.Now()
 
 	printSystemInfo()
