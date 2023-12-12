@@ -31,12 +31,11 @@ type worker struct {
 // Parameters:
 // - batchProcessor: The function that processes a batch of jobs.
 // - numWorkers: The number of workers in the pool.
-// - bufferSize: The size of the job queue buffer.
 // Returns:
 // - A pointer to the initialized WorkerPool.
-func NewWorkerPool(batchProcessor BatchProcessorFunc, numWorkers, bufferSize int) *WorkerPool {
+func NewWorkerPool(batchProcessor BatchProcessorFunc, numWorkers int) *WorkerPool {
 	pool := &WorkerPool{
-		jobQueue:       make(chan Job, bufferSize),
+		jobQueue:       make(chan Job, numWorkers),
 		batchProcessor: batchProcessor,
 	}
 
