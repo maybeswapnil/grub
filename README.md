@@ -33,7 +33,7 @@ func myBatchProcessor(job workerpool.Job) {
 
 func main() {
 	// Create a worker pool with custom job type
-	pool := workerpool.NewWorkerPool(myBatchProcessor, 5, 10)
+	pool := workerpool.NewWorkerPool(myBatchProcessor, 10)
 	start := time.Now()
 
 	// Add custom jobs to the pool
