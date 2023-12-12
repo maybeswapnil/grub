@@ -50,17 +50,52 @@ func main() {
 ```
 
 ### API
-workerpool.Job Represents a unit of work. Users can define their own types that implement this interface.
 
-type BatchProcessorFunc func(Job) Represents a function that processes a batch of jobs. Users should implement their own custom batch processor function.
+This Go code defines a simple worker pool package named "grub" that enables concurrent processing of jobs using a specified number of workers. Below is a breakdown of the components and their functionalities:
 
-type WorkerPool struct Represents a pool of workers.
+**Job Interface:**
+The `Job` interface is an empty interface, indicating that any type can be used as a job.
 
-NewWorkerPool(batchProcessor BatchProcessorFunc, numWorkers, bufferSize int) *WorkerPool: Initializes a new worker pool.
+**BatchProcessorFunc Type:**
+The `BatchProcessorFunc` type is a function signature for processing a batch of jobs.
 
-AddJob(job Job) error: Adds a job to the worker pool.
+**WorkerPool Struct:**
+Represents a pool of workers capable of processing jobs concurrently.
+- Fields:
+  - `workers`: A slice of worker instances.
+  - `jobQueue`: A buffered channel for queuing jobs.
+  - `batchProcessor`: The function that processes a batch of jobs.
+  - `wg`: A WaitGroup to wait for all jobs to complete.
+  - `mux`: A mutex to synchronize access to shared data.
+  - `closed`: A flag indicating whether the pool is closed or not.
 
-Wait(): Waits for all jobs to complete.
+**Worker Struct:**
+Represents an individual worker.
+- Fields:
+  - `id`: Unique identifier for the worker.
+  - `workerPool`: Reference to the parent worker pool.
+
+**NewWorkerPool Function:**
+Initializes a new worker pool.
+- Parameters:
+  - `batchProcessor`: The function that processes a batch of jobs.
+  - `numWorkers`: The number of workers in the pool.
+- Creates worker instances, initializes the pool, and starts each worker.
+
+**start Method (Worker):**
+Initiates a worker to process jobs.
+- A goroutine is spawned for each worker, continuously processing jobs from the job queue.
+
+**AddJob Method (WorkerPool):**
+Adds a job to the worker pool.
+- If the pool is closed, it returns an error; otherwise, it adds the job to the queue and increments the WaitGroup.
+
+**Wait Method (WorkerPool):**
+Waits for all jobs to complete.
+- Closes the job queue and sets the pool to closed, preventing further job additions.
+- Uses a mutex to ensure thread safety.
+
+Overall, this worker pool implementation provides a simple way to process a batch of jobs concurrently using a specified number of workers. Users can add jobs to the pool, and the pool will manage the execution of these jobs efficiently. The `Wait` method is crucial for ensuring that the program waits until all jobs are completed before proceeding.
 
 ### Contributing
 Feel free to contribute by opening issues or submitting pull requests. Bug reports, feature requests, and feedback are highly encouraged.
