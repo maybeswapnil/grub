@@ -1,4 +1,4 @@
-# Worker Pool in Go
+# GRUB : A Worker Pool in Go
 
 The "grub" package in the provided Go code defines a flexible and concurrent worker pool for processing jobs. The package introduces the WorkerPool type, allowing users to efficiently distribute and execute a collection of jobs across a specified number of workers. The design encapsulates individual workers in the worker type, each running concurrently in a goroutine to process jobs from a shared job queue. The package ensures thread safety using a mutex and provides a clean interface for users to add jobs to the pool. The Wait method plays a crucial role in managing the pool's lifecycle, closing the job queue and waiting for all jobs to complete before allowing the program to proceed. Overall, this implementation facilitates parallel job processing, making it suitable for scenarios where concurrent execution of tasks is beneficial, such as in concurrent data processing or other parallelizable workloads.
 
